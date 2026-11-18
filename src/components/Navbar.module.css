@@ -1,59 +1,64 @@
 .navbarCustom {
-  background-color: #ffffff;
-  border-bottom: 1px solid #e2e8f0;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+  background-color: rgba(13, 8, 20, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 2px solid var(--gta-pink);
+  box-shadow: 0 4px 20px rgba(255, 42, 133, 0.25);
   position: sticky;
   top: 0;
   z-index: 1030;
 }
 
 .logoBadge {
-  background: var(--unahur-green);
-  color: white;
-  font-weight: 800;
-  padding: 0.2rem 0.6rem;
+  background: linear-gradient(135deg, var(--gta-pink) 0%, var(--gta-orange) 100%);
+  color: #ffffff;
+  font-weight: 900;
+  padding: 0.25rem 0.65rem;
   border-radius: 6px;
   font-size: 0.9rem;
+  letter-spacing: 1px;
+}
+
+/* 4. "Anti-Social Net" del navbar en color blanco */
+.logoTitle {
+  font-size: 1.25rem;
+  font-weight: 900;
+  color: #ffffff !important;
   letter-spacing: 0.5px;
 }
 
-.logoTitle {
-  font-size: 1.25rem;
-  font-weight: 800;
-  color: #1e293b;
-}
-
 .navLinkCustom {
-  color: #64748b;
-  font-weight: 500;
-  padding: 0.4rem 0.8rem;
+  color: #cbd5e1;
+  font-weight: 600;
+  padding: 0.4rem 0.85rem;
   border-radius: 6px;
   text-decoration: none !important;
   transition: all 0.2s ease;
 }
 
 .navLinkCustom:hover {
-  color: var(--unahur-green);
-  background-color: var(--unahur-green-light);
+  color: var(--gta-cyan);
+  background-color: rgba(0, 229, 255, 0.12);
 }
 
 .navLinkActive {
-  color: var(--unahur-green-dark) !important;
-  background-color: var(--unahur-green-light) !important;
-  font-weight: 700 !important;
+  color: var(--gta-pink) !important;
+  background-color: rgba(255, 42, 133, 0.15) !important;
+  border-bottom: 2px solid var(--gta-pink);
+  font-weight: 800 !important;
 }
 
 .btnLogout {
-  border: 1px solid #fecaca;
-  color: #dc2626;
-  background-color: #fef2f2;
-  font-weight: 600;
+  border: 1px solid #ff4d6d;
+  color: #ff4d6d;
+  background-color: transparent;
+  font-weight: 700;
   padding: 0.35rem 0.8rem;
   border-radius: 6px;
   transition: all 0.2s ease;
 }
 
 .btnLogout:hover {
-  background-color: #dc2626;
+  background-color: #ff4d6d;
   color: #ffffff;
 }

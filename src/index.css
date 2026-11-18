@@ -1,48 +1,97 @@
 /* ==========================================================================
-   UnaHur Anti-Social Net - Variables y Estilos Globales
+   UnaHur Anti-Social Net - Paleta Vice City / GTA VI con fondo Sunset Neon
    ========================================================================== */
 
 :root {
-  --unahur-green: #10b981;
-  --unahur-green-dark: #059669;
-  --unahur-green-light: #d1fae5;
-  --unahur-navy: #1e293b;
-  --bg-page: #f8fafc;
-  --card-bg: #ffffff;
+  /* Tonos icónicos de GTA VI / Vice City */
+  --gta-pink: #ff2a85;
+  --gta-pink-hover: #e01b70;
+  --gta-orange: #ff7a00;
+  --gta-orange-hover: #e06800;
+  --gta-purple: #7928ca;
+  --gta-cyan: #00e5ff;
+  --gta-cyan-hover: #00b4cc;
+
+  /* Tarjetas translúcidas estilo Dark Glassmorphism */
+  --card-bg: rgba(18, 16, 28, 0.88);
+  --card-border: rgba(255, 42, 133, 0.25);
+
+  /* Textos */
+  --text-main: #ffffff;
+  --text-muted: #cbd5e1;
 }
 
 body {
-  background-color: var(--bg-page);
-  color: #1f2937;
+  background: linear-gradient(
+    160deg,
+    #0d0814 0%,
+    #2a0826 30%,
+    #4a0e35 55%,
+    #3b1328 75%,
+    #0b0c10 100%
+  ) !important;
+  background-attachment: fixed !important;
+  background-size: cover !important;
+  color: #ffffff !important;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   min-height: 100vh;
 }
 
-/* Enlaces sin subrayado por defecto */
-a {
-  text-decoration: none;
+/* Todos los encabezados y etiquetas de formularios en blanco puro */
+h1, h2, h3, h4, h5, h6, .form-label {
+  color: #ffffff !important;
 }
 
-/* Estilo general para botones primarios con el verde institucional de UnaHur */
+a {
+  color: var(--gta-cyan);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--gta-pink);
+}
+
+/* Botón Rosa Neón GTA VI */
 .btn-unahur {
-  background-color: var(--unahur-green) !important;
-  border-color: var(--unahur-green) !important;
-  color: white !important;
-  font-weight: 600;
+  background: linear-gradient(135deg, var(--gta-pink) 0%, #ff0055 100%) !important;
+  border: none !important;
+  color: #ffffff !important;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 15px rgba(255, 42, 133, 0.4);
+  transition: all 0.2s ease;
 }
 
 .btn-unahur:hover {
-  background-color: var(--unahur-green-dark) !important;
-  border-color: var(--unahur-green-dark) !important;
+  background: linear-gradient(135deg, #ff4095 0%, #ff1a6b 100%) !important;
+  box-shadow: 0 6px 20px rgba(255, 42, 133, 0.6);
+  transform: translateY(-1px);
 }
 
-/* Footer fijo abajo */
+/* Botón secundario / contorno turquesa */
+.btn-outline-secondary {
+  border-color: rgba(0, 229, 255, 0.4) !important;
+  color: var(--gta-cyan) !important;
+  background-color: rgba(0, 229, 255, 0.05);
+}
+
+.btn-outline-secondary:hover {
+  background-color: var(--gta-cyan) !important;
+  border-color: var(--gta-cyan) !important;
+  color: #0b0c10 !important;
+  box-shadow: 0 0 12px rgba(0, 229, 255, 0.5);
+}
+
+/* Footer estilo Vice */
 .app-footer {
-  background-color: var(--card-bg);
-  border-top: 1px solid #e2e8f0;
+  background-color: rgba(13, 8, 20, 0.9);
+  backdrop-filter: blur(8px);
+  border-top: 1px solid var(--card-border);
   text-align: center;
   padding: 1.5rem 1rem;
   font-size: 0.85rem;
-  color: #64748b;
+  color: var(--text-muted);
   margin-top: auto;
 }

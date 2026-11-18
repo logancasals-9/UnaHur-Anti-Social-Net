@@ -1,20 +1,23 @@
 .cardCustom {
-  background-color: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background-color: var(--card-bg) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--card-border) !important;
+  border-radius: 14px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
   overflow: hidden;
 }
 
 .cardCustom:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 16px -2px rgba(0, 0, 0, 0.08);
+  border-color: var(--gta-pink) !important;
+  box-shadow: 0 10px 30px rgba(255, 42, 133, 0.3);
 }
 
 .author {
-  font-weight: 700;
-  color: #1e293b;
+  font-weight: 800;
+  color: var(--gta-orange);
 }
 
 .date {
@@ -24,13 +27,14 @@
 
 .description {
   font-size: 1.05rem;
-  color: #334155;
+  color: var(--text-main);
   white-space: pre-line;
 }
 
 .imageContainer {
   position: relative;
-  background-color: #f1f5f9;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--card-border);
   border-radius: 8px;
   overflow: hidden;
   max-height: 280px;
@@ -47,26 +51,29 @@
   position: absolute;
   bottom: 8px;
   right: 8px;
-  background: rgba(15, 23, 42, 0.8);
-  color: #ffffff;
+  background: rgba(11, 12, 16, 0.9);
+  color: var(--gta-cyan);
+  border: 1px solid var(--gta-cyan);
   padding: 0.2rem 0.5rem;
   border-radius: 6px;
   font-size: 0.75rem;
-  font-weight: 600;
+  font-weight: 700;
 }
 
+/* ETIQUETAS EN COLOR CELESTE */
 .tagBadge {
-  background-color: var(--unahur-green-light);
-  color: var(--unahur-green-dark);
-  font-size: 0.75rem;
-  font-weight: 600;
-  padding: 0.25rem 0.6rem;
-  border-radius: 9999px;
-  display: inline-block;
+  background-color: #0284c7 !important; /* Celeste vibrante */
+  color: #ffffff !important;
+  border: 1px solid #38bdf8 !important;
+  font-size: 0.8rem !important;
+  font-weight: 700 !important;
+  padding: 0.25rem 0.7rem !important;
+  border-radius: 9999px !important;
+  display: inline-block !important;
 }
 
 .footer {
-  border-top: 1px solid #f1f5f9;
+  border-top: 1px solid var(--card-border);
   font-size: 0.85rem;
-  color: #64748b;
+  color: #94a3b8;
 }

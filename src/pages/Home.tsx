@@ -77,7 +77,7 @@ export function Home() {
 
       {/* Feed de Publicaciones */}
       <main>
-        <h2 className="h4 fw-bold mb-3 text-dark">Feed de Publicaciones Recientes</h2>
+        <h2 className="h4 mb-3 feed-heading">Feed de Publicaciones Recientes</h2>
 
         {/* Spinner nativo de Bootstrap */}
         {loading && (

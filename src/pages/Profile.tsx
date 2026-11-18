@@ -4,6 +4,7 @@ import { useAuth } from '../context/AuthContext';
 import type { Post } from '../types';
 import { getPosts } from '../services/api';
 import { PostCard } from '../components/PostCard';
+import './Profile.css';
 
 export function Profile() {
   const { user, logout } = useAuth();
@@ -13,7 +14,7 @@ export function Profile() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // Cargamos los posts del usuario logueado usando su userId
+  // Cargamos los posts del usuario logueado usando su userId (Query String)
   useEffect(() => {
     if (!user) return;
 
@@ -46,45 +47,62 @@ export function Profile() {
   if (!user) return null;
 
   return (
-    <div className="container profile-container">
-      {/* Cabecera del Perfil */}
-      <section className="profile-header-card">
-        <div className="profile-avatar">
-          {user.nickName.charAt(0).toUpperCase()}
-        </div>
-        <div className="profile-info">
-          <h2>@{user.nickName}</h2>
-          <p className="profile-email">✉️ {user.email}</p>
-          <span className="profile-badge">Usuario Verificado</span>
-        </div>
-        <div className="profile-actions">
-          <Link to="/create-post" className="btn btn-primary">
-            + Nuevo Post
-          </Link>
-          <button onClick={handleLogout} className="btn btn-danger">
-            Cerrar Sesión
-          </button>
+    <div className="container py-4 profile-container" style={{ maxWidth: '850px' }}>
+      {/* Cabecera del Perfil con Bootstrap card y flexbox */}
+      <section className="card shadow-sm border-0 mb-4 p-4 rounded-4">
+        <div className="d-flex align-items-center gap-3 flex-wrap">
+          <div className="profile-avatar-circle">
+            {user.nickName.charAt(0).toUpperCase()}
+          </div>
+
+          <div className="flex-grow-1">
+            <h2 className="h4 fw-bold mb-1 text-white">@{user.nickName}</h2>
+            <p className="text-muted small mb-2">✉️ {user.email}</p>
+            <span className="badge bg-primary-subtle text-primary-emphasis rounded-pill px-3 py-1 small">
+              Usuario Activo
+            </span>
+          </div>
+
+          <div className="d-flex gap-2 flex-wrap">
+            <Link to="/create-post" className="btn btn-unahur btn-sm px-3">
+              + Nuevo Post
+            </Link>
+            <button onClick={handleLogout} className="btn btn-outline-danger btn-sm px-3">
+              Cerrar Sesión
+            </button>
+          </div>
         </div>
       </section>
 
       {/* Listado de publicaciones propias */}
-      <section className="user-posts-section">
-        <h3>Mis Publicaciones ({userPosts.length})</h3>
+      <section>
+        <h3 className="h5 fw-bold mb-3 text-white">
+          Mis Publicaciones ({userPosts.length})
+        </h3>
 
-        {loading && <div className="loading-spinner">Cargando tus posts...</div>}
-
-        {error && <div className="alert alert-error">{error}</div>}
-
-        {!loading && !error && userPosts.length === 0 && (
-          <div className="empty-profile-posts">
-            <p>Todavía no publicaste nada.</p>
-            <Link to="/create-post" className="btn btn-primary btn-sm">
-              Creá tu primera publicación acá
-            </Link>
+        {loading && (
+          <div className="text-center py-5">
+            <div className="spinner-border text-success" role="status">
+              <span className="visually-hidden">Cargando...</span>
+            </div>
+            <p className="text-muted mt-2">Cargando tus publicaciones...</p>
           </div>
         )}
 
-        <div className="posts-grid">
+        {error && <div className="alert alert-danger">{error}</div>}
+
+        {!loading && !error && userPosts.length === 0 && (
+          <div className="card text-center p-5 text-muted border-dashed rounded-4">
+            <p className="mb-2">Todavía no creaste ninguna publicación.</p>
+            <div>
+              <Link to="/create-post" className="btn btn-unahur btn-sm">
+                Creá tu primer post acá
+              </Link>
+            </div>
+          </div>
+        )}
+
+        <div>
           {userPosts.map((post) => (
             <PostCard key={post.id} post={post} />
           ))}

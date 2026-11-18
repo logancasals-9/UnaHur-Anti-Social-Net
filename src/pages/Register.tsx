@@ -47,7 +47,7 @@ export function Register() {
   return (
     <div className="container auth-wrapper py-5">
       <div className="auth-card p-4 p-md-5">
-        <h2 className="text-center mb-1">Crear Cuenta</h2>
+        <h2 className="text-center mb-1 text-white">Crear Cuenta</h2>
         <p className="auth-subtitle text-center mb-4">Unite a la comunidad de UnaHur</p>
 
         {error && <div className="alert alert-danger py-2 small">{error}</div>}

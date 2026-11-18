@@ -1,0 +1,26 @@
+.profile-avatar-circle {
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background-color: var(--gta-pink);
+  color: #ffffff;
+  border: 3px solid var(--gta-orange);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2rem;
+  font-weight: 900;
+  box-shadow: 0 0 20px rgba(255, 42, 133, 0.4);
+  flex-shrink: 0;
+}
+
+.profile-container .card {
+  background-color: var(--card-bg) !important;
+  border: 1px solid var(--card-border) !important;
+}
+
+.border-dashed {
+  border-style: dashed !important;
+  border-color: var(--card-border) !important;
+  background-color: var(--card-bg) !important;
+}

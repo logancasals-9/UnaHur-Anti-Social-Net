@@ -1,42 +1,63 @@
 .hero-banner {
-  background: linear-gradient(135deg, #10b981 0%, #047857 100%);
-  color: white;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 42, 133, 0.25) 0%,
+    rgba(255, 122, 0, 0.2) 50%,
+    rgba(121, 40, 202, 0.3) 100%
+  );
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 2px solid var(--gta-pink);
+  color: #ffffff;
   border-radius: 16px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 32px rgba(255, 42, 133, 0.3);
 }
 
+/* 1. Título "UnaHur Anti-Social Net" SIN brillo, color blanco limpio */
 .hero-title {
-  font-size: 2.2rem;
-  font-weight: 800;
-  letter-spacing: -0.5px;
+  font-size: 2.3rem;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  color: #ffffff !important;
+  text-shadow: none !important; /* Sin brillo */
+  text-transform: uppercase;
 }
 
 .tags-filter-bar {
-  background-color: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 10px;
+  background-color: var(--card-bg);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
 }
 
 .filter-tag-btn {
-  background-color: #f1f5f9;
-  border: 1px solid #e2e8f0;
-  color: #475569;
-  padding: 0.3rem 0.8rem;
+  background-color: rgba(11, 12, 16, 0.7);
+  border: 1px solid var(--card-border);
+  color: #cbd5e1;
+  padding: 0.35rem 0.9rem;
   border-radius: 9999px;
   font-size: 0.85rem;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .filter-tag-btn:hover {
-  background-color: var(--unahur-green-light);
-  color: var(--unahur-green-dark);
+  background-color: rgba(0, 229, 255, 0.2);
+  color: var(--gta-cyan);
+  border-color: var(--gta-cyan);
 }
 
 .filter-tag-btn.active {
-  background-color: var(--unahur-green);
+  background: linear-gradient(135deg, var(--gta-orange) 0%, var(--gta-pink) 100%);
   color: #ffffff;
-  border-color: var(--unahur-green);
-  font-weight: 700;
+  border-color: var(--gta-orange);
+  font-weight: 800;
+  box-shadow: 0 0 15px rgba(255, 122, 0, 0.5);
+}
+
+/* 2. Título "Feed de Publicaciones Recientes" en color blanco */
+.feed-heading {
+  color: #ffffff !important;
+  font-weight: 800;
 }

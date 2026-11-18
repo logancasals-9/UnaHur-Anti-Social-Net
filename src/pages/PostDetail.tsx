@@ -115,7 +115,7 @@ export function PostDetail() {
   }
 
   return (
-    <div className="container py-4" style={{ maxWidth: '800px' }}>
+    <div className="container py-4 post-detail-container" style={{ maxWidth: '800px' }}>
       <Link to="/" className="btn btn-link text-decoration-none text-secondary p-0 mb-3 d-inline-block">
         ← Volver al feed
       </Link>
@@ -123,7 +123,7 @@ export function PostDetail() {
       {/* Tarjeta de la publicación */}
       <article className="card shadow-sm border-0 mb-4 p-4 rounded-4">
         <header className="d-flex justify-content-between align-items-center mb-3">
-          <span className="fw-bold fs-5 text-dark">
+          <span className="fw-bold fs-5 text-white">
             @{post.User?.nickName || 'Anónimo'}
           </span>
           {post.createdAt && (
@@ -134,7 +134,7 @@ export function PostDetail() {
         </header>
 
         {/* Descripción completa */}
-        <p className="fs-5 text-secondary mb-4" style={{ whiteSpace: 'pre-line' }}>
+        <p className="fs-5 text-white mb-4" style={{ whiteSpace: 'pre-line' }}>
           {post.description}
         </p>
 
@@ -160,7 +160,7 @@ export function PostDetail() {
         {post.Tags && post.Tags.length > 0 && (
           <div className="d-flex flex-wrap gap-2">
             {post.Tags.map((tag) => (
-              <span key={tag.id} className="badge bg-success-subtle text-success-emphasis rounded-pill px-3 py-2">
+              <span key={tag.id} className="detail-tag-badge">
                 #{tag.name}
               </span>
             ))}
@@ -170,7 +170,7 @@ export function PostDetail() {
 
       {/* Sección de Comentarios */}
       <section className="card shadow-sm border-0 p-4 rounded-4">
-        <h3 className="h5 fw-bold mb-3">Comentarios ({comments.length})</h3>
+        <h3 className="h5 fw-bold mb-3 text-white">Comentarios ({comments.length})</h3>
 
         {/* Formulario para comentar */}
         {user ? (

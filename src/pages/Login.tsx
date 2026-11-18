@@ -41,7 +41,7 @@ export function Login() {
   return (
     <div className="container auth-wrapper py-5">
       <div className="auth-card p-4 p-md-5">
-        <h2 className="text-center mb-1">Iniciar Sesión</h2>
+        <h2 className="text-center mb-1 text-white">Iniciar Sesión</h2>
         <p className="auth-subtitle text-center mb-4">Ingresá a UnaHur Anti-Social Net</p>
 
         {error && <div className="alert alert-danger py-2 small">{error}</div>}

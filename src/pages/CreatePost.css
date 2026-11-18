@@ -1,0 +1,63 @@
+.create-post-card {
+  background-color: var(--card-bg) !important;
+  border: 2px solid var(--gta-pink) !important;
+  border-radius: 18px;
+  box-shadow: 0 10px 35px rgba(255, 42, 133, 0.2);
+}
+
+.create-post-card h2 {
+  color: #ffffff !important;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.create-post-card .form-control {
+  background-color: #0b0c10 !important;
+  border-color: var(--card-border) !important;
+  color: var(--text-main) !important;
+}
+
+.create-post-card .form-control:focus {
+  border-color: var(--gta-cyan) !important;
+  box-shadow: 0 0 0 3px rgba(0, 229, 255, 0.25) !important;
+}
+
+.tag-checkbox-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background-color: #0b0c10;
+  border: 1px solid var(--card-border);
+  color: var(--text-muted);
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.tag-checkbox-pill:hover {
+  background-color: rgba(0, 229, 255, 0.15);
+  color: var(--gta-cyan);
+  border-color: var(--gta-cyan);
+}
+
+.tag-checkbox-pill.selected {
+  background-color: var(--gta-pink);
+  border-color: var(--gta-pink);
+  color: #ffffff;
+  font-weight: 800;
+  box-shadow: 0 0 12px rgba(255, 42, 133, 0.5);
+}
+
+.tag-checkbox-pill input {
+  display: none;
+}
+
+.image-input-group {
+  display: flex;
+  gap: 0.5rem;
+}
