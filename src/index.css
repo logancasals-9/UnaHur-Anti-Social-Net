@@ -1,0 +1,48 @@
+/* ==========================================================================
+   UnaHur Anti-Social Net - Variables y Estilos Globales
+   ========================================================================== */
+
+:root {
+  --unahur-green: #10b981;
+  --unahur-green-dark: #059669;
+  --unahur-green-light: #d1fae5;
+  --unahur-navy: #1e293b;
+  --bg-page: #f8fafc;
+  --card-bg: #ffffff;
+}
+
+body {
+  background-color: var(--bg-page);
+  color: #1f2937;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  min-height: 100vh;
+}
+
+/* Enlaces sin subrayado por defecto */
+a {
+  text-decoration: none;
+}
+
+/* Estilo general para botones primarios con el verde institucional de UnaHur */
+.btn-unahur {
+  background-color: var(--unahur-green) !important;
+  border-color: var(--unahur-green) !important;
+  color: white !important;
+  font-weight: 600;
+}
+
+.btn-unahur:hover {
+  background-color: var(--unahur-green-dark) !important;
+  border-color: var(--unahur-green-dark) !important;
+}
+
+/* Footer fijo abajo */
+.app-footer {
+  background-color: var(--card-bg);
+  border-top: 1px solid #e2e8f0;
+  text-align: center;
+  padding: 1.5rem 1rem;
+  font-size: 0.85rem;
+  color: #64748b;
+  margin-top: auto;
+}

@@ -1,0 +1,59 @@
+.navbarCustom {
+  background-color: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 1030;
+}
+
+.logoBadge {
+  background: var(--unahur-green);
+  color: white;
+  font-weight: 800;
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+}
+
+.logoTitle {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #1e293b;
+}
+
+.navLinkCustom {
+  color: #64748b;
+  font-weight: 500;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  text-decoration: none !important;
+  transition: all 0.2s ease;
+}
+
+.navLinkCustom:hover {
+  color: var(--unahur-green);
+  background-color: var(--unahur-green-light);
+}
+
+.navLinkActive {
+  color: var(--unahur-green-dark) !important;
+  background-color: var(--unahur-green-light) !important;
+  font-weight: 700 !important;
+}
+
+.btnLogout {
+  border: 1px solid #fecaca;
+  color: #dc2626;
+  background-color: #fef2f2;
+  font-weight: 600;
+  padding: 0.35rem 0.8rem;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.btnLogout:hover {
+  background-color: #dc2626;
+  color: #ffffff;
+}

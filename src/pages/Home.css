@@ -1,0 +1,42 @@
+.hero-banner {
+  background: linear-gradient(135deg, #10b981 0%, #047857 100%);
+  color: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.hero-title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.tags-filter-bar {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+}
+
+.filter-tag-btn {
+  background-color: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  color: #475569;
+  padding: 0.3rem 0.8rem;
+  border-radius: 9999px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filter-tag-btn:hover {
+  background-color: var(--unahur-green-light);
+  color: var(--unahur-green-dark);
+}
+
+.filter-tag-btn.active {
+  background-color: var(--unahur-green);
+  color: #ffffff;
+  border-color: var(--unahur-green);
+  font-weight: 700;
+}
