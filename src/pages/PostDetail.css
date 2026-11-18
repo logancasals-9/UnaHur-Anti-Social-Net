@@ -71,3 +71,33 @@
   border-color: var(--gta-cyan) !important;
   box-shadow: 0 0 0 3px rgba(0, 229, 255, 0.25) !important;
 }
+
+/* Avatar del autor del post (mismo criterio que navbar, feed y perfil) */
+.detail-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--gta-pink) 0%, var(--gta-orange) 100%);
+  color: #ffffff;
+  font-size: 1.05rem;
+  font-weight: 900;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Avatar mas chico dentro de cada comentario */
+.comment-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--gta-cyan) 0%, #0284c7 100%);
+  color: #0b0c10;
+  font-size: 0.72rem;
+  font-weight: 900;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}

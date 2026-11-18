@@ -71,6 +71,19 @@ export async function createPost(
   return await response.json();
 }
 
+// DELETE /posts/:id -> Borrar una publicacion propia
+// Mandamos el userId para que el backend valide que el post es nuestro.
+export async function deletePost(id: number, userId: number): Promise<void> {
+  const response = await fetch(`${API_URL}/posts/${id}?userId=${userId}`, {
+    method: 'DELETE',
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => null);
+    throw new Error(errorData?.error || 'Error al borrar la publicacion');
+  }
+}
+
 // ==================== ETIQUETAS (TAGS) ====================
 
 // GET /tags -> Listado de todas las etiquetas disponibles

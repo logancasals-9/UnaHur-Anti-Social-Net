@@ -9,23 +9,37 @@
   z-index: 1030;
 }
 
+/* Alto de la barra. En desktop damos mas aire; en mobile se achica abajo. */
+.navInner {
+  padding-top: 0.95rem;
+  padding-bottom: 0.95rem;
+}
+
 .logoBadge {
   background: linear-gradient(135deg, var(--gta-pink) 0%, var(--gta-orange) 100%);
   color: #ffffff;
   font-weight: 900;
-  padding: 0.25rem 0.65rem;
-  border-radius: 6px;
-  font-size: 0.9rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: 7px;
+  font-size: 1rem;
   letter-spacing: 1px;
 }
 
-/* 4. "Anti-Social Net" del navbar en color blanco */
 .logoTitle {
-  font-size: 1.25rem;
+  font-size: 1.4rem;
   font-weight: 900;
   color: #ffffff !important;
   letter-spacing: 0.5px;
 }
+
+/* ===== Contenedor de links ===== */
+/* Desktop: fila horizontal normal */
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 
 .navLinkCustom {
   color: #cbd5e1;
@@ -33,7 +47,10 @@
   padding: 0.4rem 0.85rem;
   border-radius: 6px;
   text-decoration: none !important;
-  transition: all 0.2s ease;
+  transition: color 0.2s ease, background-color 0.2s ease;
+  /* Borde transparente reservado de entrada: evita el salto de 2px
+     cuando el link pasa a estar activo */
+  border-bottom: 2px solid transparent;
 }
 
 .navLinkCustom:hover {
@@ -41,11 +58,34 @@
   background-color: rgba(0, 229, 255, 0.12);
 }
 
+/* Foco visible para navegacion por teclado (Tab) */
+.navLinkCustom:focus-visible,
+.btnLogout:focus-visible,
+.burger:focus-visible {
+  outline: 2px solid var(--gta-cyan);
+  outline-offset: 2px;
+}
+
 .navLinkActive {
   color: var(--gta-pink) !important;
   background-color: rgba(255, 42, 133, 0.15) !important;
-  border-bottom: 2px solid var(--gta-pink);
+  border-bottom-color: var(--gta-pink);
   font-weight: 800 !important;
+}
+
+/* Circulito con la inicial del usuario (igual que en el perfil) */
+.avatar {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--gta-pink) 0%, var(--gta-orange) 100%);
+  color: #ffffff;
+  font-size: 0.7rem;
+  font-weight: 900;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
 .btnLogout {
@@ -55,10 +95,73 @@
   font-weight: 700;
   padding: 0.35rem 0.8rem;
   border-radius: 6px;
-  transition: all 0.2s ease;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .btnLogout:hover {
   background-color: #ff4d6d;
   color: #ffffff;
+}
+
+/* ===== Boton hamburguesa ===== */
+.burger {
+  background-color: transparent;
+  border: 1px solid var(--gta-pink);
+  color: #ffffff;
+  font-size: 1.15rem;
+  line-height: 1;
+  padding: 0.3rem 0.65rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.burger:hover {
+  background-color: rgba(255, 42, 133, 0.2);
+}
+
+/* ===== Mobile: menu desplegable ===== */
+@media (max-width: 767.98px) {
+  .navLinks {
+    /* Oculto por defecto; se despliega debajo de la barra */
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.25rem;
+    padding: 0.75rem 1rem 1rem;
+    background-color: rgba(13, 8, 20, 0.98);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 2px solid var(--gta-pink);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  }
+
+  .navLinksOpen {
+    display: flex;
+  }
+
+  /* En mobile los links ocupan todo el ancho y son faciles de tocar */
+  .navLinkCustom,
+  .btnLogout {
+    width: 100%;
+    text-align: left;
+    padding: 0.7rem 0.85rem;
+    border-radius: 8px;
+  }
+
+
+
+  .logoTitle {
+    font-size: 1.05rem;
+  }
+
+  /* En pantallas chicas el alto extra molesta mas de lo que suma */
+  .navInner {
+    padding-top: 0.6rem;
+    padding-bottom: 0.6rem;
+  }
 }

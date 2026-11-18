@@ -1,5 +1,5 @@
 import { useEffect, useState, type FormEvent } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import type { Post, Comment, PostImage } from '../types';
 import { useAuth } from '../context/AuthContext';
 import {
@@ -7,12 +7,35 @@ import {
   getCommentsByPostId,
   getImagesByPostId,
   createComment,
+  deletePost,
 } from '../services/api';
 import './PostDetail.css';
+
+// Ordena comentarios del mas viejo al mas nuevo
+function ordenarPorFecha(lista: Comment[]): Comment[] {
+  return [...lista].sort((a, b) => {
+    const fechaA = a.createdAt ? new Date(a.createdAt).getTime() : 0;
+    const fechaB = b.createdAt ? new Date(b.createdAt).getTime() : 0;
+    return fechaA - fechaB;
+  });
+}
+
+// Fecha larga con hora, para una vista donde sobra el espacio
+function formatearFecha(iso?: string): string {
+  if (!iso) return '';
+  return new Date(iso).toLocaleString('es-AR', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+  });
+}
 
 export function PostDetail() {
   const { id } = useParams<{ id: string }>();
   const { user } = useAuth();
+  const navigate = useNavigate();
 
   const [post, setPost] = useState<Post | null>(null);
   const [comments, setComments] = useState<Comment[]>([]);
@@ -20,6 +43,10 @@ export function PostDetail() {
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  const [confirmingDelete, setConfirmingDelete] = useState(false);
+  const [deleting, setDeleting] = useState(false);
+  const [deleteError, setDeleteError] = useState<string | null>(null);
 
   const [newComment, setNewComment] = useState('');
   const [submittingComment, setSubmittingComment] = useState(false);
@@ -40,7 +67,8 @@ export function PostDetail() {
         ]);
 
         setPost(postData);
-        setComments(commentsData);
+        // Los ordenamos del mas viejo al mas nuevo (la API no garantiza orden)
+        setComments(ordenarPorFecha(commentsData));
         setImages(imagesData);
       } catch (err) {
         if (err instanceof Error) {
@@ -55,6 +83,20 @@ export function PostDetail() {
 
     loadPostData();
   }, [id]);
+
+  const handleDelete = async () => {
+    if (!user || !post) return;
+    try {
+      setDeleting(true);
+      setDeleteError(null);
+      await deletePost(post.id, user.id);
+      navigate('/');
+    } catch (err) {
+      setDeleteError(err instanceof Error ? err.message : 'No se pudo borrar la publicación');
+      setDeleting(false);
+      setConfirmingDelete(false);
+    }
+  };
 
   const handleCommentSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -122,16 +164,58 @@ export function PostDetail() {
 
       {/* Tarjeta de la publicación */}
       <article className="card shadow-sm border-0 mb-4 p-4 rounded-4">
-        <header className="d-flex justify-content-between align-items-center mb-3">
-          <span className="fw-bold fs-5 text-white">
-            @{post.User?.nickName || 'Anónimo'}
+        <header className="d-flex justify-content-between align-items-center gap-3 mb-3 flex-wrap">
+          <span className="d-flex align-items-center gap-2">
+            <span className="detail-avatar" aria-hidden="true">
+              {(post.User?.nickName || '?').charAt(0).toUpperCase()}
+            </span>
+            <span className="fw-bold fs-5 text-white">
+              @{post.User?.nickName || 'Anónimo'}
+            </span>
           </span>
-          {post.createdAt && (
-            <time className="text-muted small">
-              {new Date(post.createdAt).toLocaleDateString()}
-            </time>
-          )}
+
+          <span className="d-flex align-items-center gap-3">
+            {post.createdAt && (
+              <time className="text-muted small">{formatearFecha(post.createdAt)}</time>
+            )}
+
+            {/* Eliminar: solo para el autor, igual que en las tarjetas del feed */}
+            {user?.id === post.UserId && !confirmingDelete && (
+              <button
+                type="button"
+                className="btn btn-outline-danger btn-sm"
+                onClick={() => setConfirmingDelete(true)}
+                disabled={deleting}
+              >
+                Eliminar publicación
+              </button>
+            )}
+
+            {user?.id === post.UserId && confirmingDelete && (
+              <span className="d-flex align-items-center gap-2">
+                <span className="small text-danger">¿Borrar?</span>
+                <button
+                  type="button"
+                  className="btn btn-danger btn-sm py-0 px-2"
+                  onClick={handleDelete}
+                  disabled={deleting}
+                >
+                  {deleting ? 'Borrando...' : 'Sí'}
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-outline-secondary btn-sm py-0 px-2"
+                  onClick={() => setConfirmingDelete(false)}
+                  disabled={deleting}
+                >
+                  No
+                </button>
+              </span>
+            )}
+          </span>
         </header>
+
+        {deleteError && <div className="alert alert-danger py-2 small">{deleteError}</div>}
 
         {/* Descripción completa */}
         <p className="fs-5 text-white mb-4" style={{ whiteSpace: 'pre-line' }}>
@@ -177,7 +261,11 @@ export function PostDetail() {
           <form onSubmit={handleCommentSubmit} className="mb-4">
             {commentError && <div className="alert alert-danger py-2 small">{commentError}</div>}
             <div className="mb-2">
+              <label htmlFor="nuevo-comentario" className="visually-hidden">
+                Escribí tu comentario
+              </label>
               <textarea
+                id="nuevo-comentario"
                 className="form-control"
                 placeholder="Escribí un comentario reflexivo..."
                 rows={3}
@@ -201,18 +289,21 @@ export function PostDetail() {
         )}
 
         {/* Lista de comentarios */}
-        <div className="d-flex flex-direction-column flex-column gap-2">
+        <div className="d-flex flex-column gap-2">
           {comments.length === 0 ? (
             <p className="text-muted small fst-italic mb-0">No hay comentarios en esta publicación aún.</p>
           ) : (
             comments.map((c) => (
               <div key={c.id} className="comment-bubble p-3">
-                <div className="d-flex justify-content-between align-items-center mb-1">
-                  <span className="comment-author">@{c.User?.nickName || 'Usuario'}</span>
-                  {c.createdAt && (
-                    <span className="comment-date">
-                      {new Date(c.createdAt).toLocaleDateString()}
+                <div className="d-flex justify-content-between align-items-center gap-2 mb-1">
+                  <span className="d-flex align-items-center gap-2">
+                    <span className="comment-avatar" aria-hidden="true">
+                      {(c.User?.nickName || '?').charAt(0).toUpperCase()}
                     </span>
+                    <span className="comment-author">@{c.User?.nickName || 'Usuario'}</span>
+                  </span>
+                  {c.createdAt && (
+                    <span className="comment-date">{formatearFecha(c.createdAt)}</span>
                   )}
                 </div>
                 <p className="comment-content mb-0">{c.content}</p>

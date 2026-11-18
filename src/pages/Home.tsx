@@ -39,17 +39,22 @@ export function Home() {
     fetchData();
   }, []);
 
+  // Sacamos el post borrado de la lista sin volver a pedir todo al backend
+  const handlePostDeleted = (postId: number) => {
+    setPosts((prev) => prev.filter((p) => p.id !== postId));
+  };
+
   const filteredPosts = selectedTag
     ? posts.filter((p) => p.Tags?.some((t) => t.name === selectedTag))
     : posts;
 
   return (
-    <div className="container py-4" style={{ maxWidth: '850px' }}>
+    <div className="container py-4" style={{ maxWidth: '1200px' }}>
       {/* Banner de bienvenida (Sobre Nosotros) */}
       <section className="hero-banner p-4 p-md-5 mb-4 text-center">
         <h1 className="hero-title mb-2">UnaHur Anti-Social Net</h1>
         <p className="lead mb-0 opacity-90">
-          La red social para la people de la unahur. Compartí tus pensamientos, fotos y comentarios con la comunidad.
+          La red social de la comunidad UnaHur. Compartí tus ideas, fotos y comentarios.
         </p>
       </section>
 
@@ -100,9 +105,12 @@ export function Home() {
           </div>
         )}
 
-        <div>
+        {/* Grilla responsive: 1 columna en celular, 2 en tablet, 3 en escritorio */}
+        <div className="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-3">
           {filteredPosts.map((post) => (
-            <PostCard key={post.id} post={post} />
+            <div className="col" key={post.id}>
+              <PostCard post={post} onDeleted={handlePostDeleted} />
+            </div>
           ))}
         </div>
       </main>

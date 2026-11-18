@@ -39,6 +39,10 @@ export function Profile() {
     fetchUserPosts();
   }, [user]);
 
+  const handlePostDeleted = (postId: number) => {
+    setUserPosts((prev) => prev.filter((p) => p.id !== postId));
+  };
+
   const handleLogout = () => {
     logout();
     navigate('/');
@@ -47,7 +51,7 @@ export function Profile() {
   if (!user) return null;
 
   return (
-    <div className="container py-4 profile-container" style={{ maxWidth: '850px' }}>
+    <div className="container py-4 profile-container" style={{ maxWidth: '1200px' }}>
       {/* Cabecera del Perfil con Bootstrap card y flexbox */}
       <section className="card shadow-sm border-0 mb-4 p-4 rounded-4">
         <div className="d-flex align-items-center gap-3 flex-wrap">
@@ -102,9 +106,11 @@ export function Profile() {
           </div>
         )}
 
-        <div>
+        <div className="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-3">
           {userPosts.map((post) => (
-            <PostCard key={post.id} post={post} />
+            <div className="col" key={post.id}>
+              <PostCard post={post} onDeleted={handlePostDeleted} />
+            </div>
           ))}
         </div>
       </section>
