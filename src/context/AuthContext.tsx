@@ -53,7 +53,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   // Cierra sesión: borra el estado y la copia guardada.
   const logout = () => {
     setUser(null);
-    localStorage.removeItem('user');
+    localStorage.removeItem('user'); 
   };
 
   // Loguea directo sin pedir contraseña. Lo usa Register.tsx después de crear la cuenta.
