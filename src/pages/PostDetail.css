@@ -18,9 +18,8 @@
   border-color: var(--gta-pink);
 }
 
-/* Etiquetas en color celeste dentro del detalle */
 .detail-tag-badge {
-  background-color: #0284c7 !important; /* Celeste vibrante */
+  background-color: #0284c7 !important;
   color: #ffffff !important;
   border: 1px solid #38bdf8 !important;
   font-size: 0.85rem;
@@ -72,7 +71,6 @@
   box-shadow: 0 0 0 3px rgba(0, 229, 255, 0.25) !important;
 }
 
-/* Avatar del autor del post (mismo criterio que navbar, feed y perfil) */
 .detail-avatar {
   width: 38px;
   height: 38px;
@@ -87,7 +85,6 @@
   flex-shrink: 0;
 }
 
-/* Avatar mas chico dentro de cada comentario */
 .comment-avatar {
   width: 24px;
   height: 24px;

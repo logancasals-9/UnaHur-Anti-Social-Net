@@ -7,7 +7,7 @@ import styles from './PostCard.module.css';
 
 interface PostCardProps {
   post: Post;
-  // Callback opcional: la pagina padre lo usa para sacar el post de su lista
+
   onDeleted?: (postId: number) => void;
 }
 
@@ -19,7 +19,6 @@ export function PostCard({ post, onDeleted }: PostCardProps) {
   const [deleting, setDeleting] = useState(false);
   const [deleteError, setDeleteError] = useState<string | null>(null);
 
-  // Solo el autor del post ve el boton de borrar
   const isOwner = user != null && user.id === post.UserId;
 
   const handleDelete = async () => {
@@ -56,7 +55,7 @@ export function PostCard({ post, onDeleted }: PostCardProps) {
 
   return (
     <article className={`${styles.cardCustom} p-3 h-100 d-flex flex-column`}>
-      {/* Cabecera del post */}
+
       <header className="d-flex justify-content-between align-items-center mb-2">
         <span className={styles.author}>
           @{post.User?.nickName || 'Anónimo'}
@@ -68,7 +67,6 @@ export function PostCard({ post, onDeleted }: PostCardProps) {
             </time>
           )}
 
-          {/* Borrar: solo visible para el autor */}
           {isOwner && !confirming && (
             <button
               type="button"
@@ -108,10 +106,8 @@ export function PostCard({ post, onDeleted }: PostCardProps) {
         <div className="alert alert-danger py-1 px-2 small mb-2">{deleteError}</div>
       )}
 
-      {/* Contenido / Descripción */}
       <p className={`${styles.description} mb-3`}>{post.description}</p>
 
-      {/* Imagen si la hay */}
       {images.length > 0 && (
         <div className={`${styles.imageContainer} mb-3`}>
           <img
@@ -129,7 +125,6 @@ export function PostCard({ post, onDeleted }: PostCardProps) {
         </div>
       )}
 
-      {/* Etiquetas / Tags */}
       {post.Tags && post.Tags.length > 0 && (
         <div className="d-flex flex-wrap gap-1 mb-3">
           {post.Tags.map((tag) => (
@@ -140,13 +135,11 @@ export function PostCard({ post, onDeleted }: PostCardProps) {
         </div>
       )}
 
-      {/* Pie de tarjeta con Bootstrap flex */}
       <footer className={`${styles.footer} d-flex justify-content-between align-items-center pt-2 mt-auto`}>
         <span>
           💬 {commentCount} {commentCount === 1 ? 'comentario' : 'comentarios'}
         </span>
 
-        {/* Botón Ver más con clase de Bootstrap btn-sm */}
         <Link to={`/post/${post.id}`} className="btn btn-outline-secondary btn-sm">
           Ver más →
         </Link>

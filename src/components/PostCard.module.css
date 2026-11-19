@@ -60,9 +60,8 @@
   font-weight: 700;
 }
 
-/* ETIQUETAS EN COLOR CELESTE */
 .tagBadge {
-  background-color: #0284c7 !important; /* Celeste vibrante */
+  background-color: #0284c7 !important;
   color: #ffffff !important;
   border: 1px solid #38bdf8 !important;
   font-size: 0.8rem !important;

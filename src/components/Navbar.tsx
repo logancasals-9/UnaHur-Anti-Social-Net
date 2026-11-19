@@ -7,10 +7,8 @@ export function Navbar() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
 
-  // Estado del menu hamburguesa (solo aplica en pantallas chicas)
   const [menuOpen, setMenuOpen] = useState(false);
 
-  // Permitimos cerrar el menu con la tecla Escape
   useEffect(() => {
     if (!menuOpen) return;
     const onKeyDown = (e: KeyboardEvent) => {
@@ -26,20 +24,18 @@ export function Navbar() {
     navigate('/');
   };
 
-  // Clase de cada link, marcando el activo
   const linkClass = ({ isActive }: { isActive: boolean }) =>
     `${styles.navLinkCustom} ${isActive ? styles.navLinkActive : ''}`;
 
   return (
     <header className={styles.navbarCustom}>
       <div className={`container d-flex align-items-center justify-content-between ${styles.navInner}`}>
-        {/* Logo */}
+
         <Link to="/" className="d-flex align-items-center gap-2 text-decoration-none">
           <span className={styles.logoBadge}>UnaHur</span>
           <span className={styles.logoTitle}>Anti-Social Net</span>
         </Link>
 
-        {/* Boton hamburguesa: visible solo en mobile (d-md-none) */}
         <button
           type="button"
           className={`${styles.burger} d-md-none`}
@@ -51,7 +47,6 @@ export function Navbar() {
           {menuOpen ? '✕' : '☰'}
         </button>
 
-        {/* Enlaces: en desktop es una fila, en mobile se despliega abajo */}
         <nav
           id="main-nav"
           aria-label="Navegación principal"

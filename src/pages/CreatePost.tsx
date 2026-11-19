@@ -62,16 +62,13 @@ export function CreatePost() {
     try {
       setSubmitting(true);
 
-      // Requisito TP: POST /posts con description, userId y tagIds
       const newPost = await createPost(description.trim(), user.id, selectedTagIds);
 
-      // Requisito TP: Por cada URL de imagen, POST /postimages con url y postId
       const validUrls = imageUrls.map((u) => u.trim()).filter((u) => u.length > 0);
       for (const url of validUrls) {
         await createPostImage(url, newPost.id);
       }
 
-      // Requisito TP: Redirigir al perfil al finalizar
       navigate('/profile');
     } catch (err) {
       if (err instanceof Error) {
@@ -93,7 +90,7 @@ export function CreatePost() {
         {error && <div className="alert alert-danger py-2 small">{error}</div>}
 
         <form onSubmit={handleSubmit}>
-          {/* Descripción obligatoria */}
+
           <div className="mb-4">
             <label htmlFor="postDescription" className="form-label fw-semibold small">
               ¿Qué estás pensando? <span className="text-danger">*</span>
@@ -110,7 +107,6 @@ export function CreatePost() {
             />
           </div>
 
-          {/* Etiquetas obtenidas de la API */}
           <div className="mb-4">
             <label className="form-label fw-semibold small d-block">Etiquetas:</label>
             {loadingTags ? (
@@ -138,7 +134,6 @@ export function CreatePost() {
             )}
           </div>
 
-          {/* URLs de imágenes opcionales */}
           <div className="mb-4">
             <label className="form-label fw-semibold small d-block">
               URLs de imágenes (opcional):
@@ -178,7 +173,6 @@ export function CreatePost() {
             </button>
           </div>
 
-          {/* Botones de acción */}
           <div className="d-flex justify-content-end gap-2 pt-2 border-top">
             <Link to="/" className="btn btn-outline-secondary btn-sm px-3" tabIndex={submitting ? -1 : 0}>
               Cancelar

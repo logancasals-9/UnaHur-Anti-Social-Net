@@ -11,7 +11,6 @@ import {
 } from '../services/api';
 import './PostDetail.css';
 
-// Ordena comentarios del mas viejo al mas nuevo
 function ordenarPorFecha(lista: Comment[]): Comment[] {
   return [...lista].sort((a, b) => {
     const fechaA = a.createdAt ? new Date(a.createdAt).getTime() : 0;
@@ -20,7 +19,6 @@ function ordenarPorFecha(lista: Comment[]): Comment[] {
   });
 }
 
-// Fecha larga con hora, para una vista donde sobra el espacio
 function formatearFecha(iso?: string): string {
   if (!iso) return '';
   return new Date(iso).toLocaleString('es-AR', {
@@ -67,7 +65,7 @@ export function PostDetail() {
         ]);
 
         setPost(postData);
-        // Los ordenamos del mas viejo al mas nuevo (la API no garantiza orden)
+
         setComments(ordenarPorFecha(commentsData));
         setImages(imagesData);
       } catch (err) {
@@ -162,7 +160,6 @@ export function PostDetail() {
         ← Volver al feed
       </Link>
 
-      {/* Tarjeta de la publicación */}
       <article className="card shadow-sm border-0 mb-4 p-4 rounded-4">
         <header className="d-flex justify-content-between align-items-center gap-3 mb-3 flex-wrap">
           <span className="d-flex align-items-center gap-2">
@@ -179,7 +176,6 @@ export function PostDetail() {
               <time className="text-muted small">{formatearFecha(post.createdAt)}</time>
             )}
 
-            {/* Eliminar: solo para el autor, igual que en las tarjetas del feed */}
             {user?.id === post.UserId && !confirmingDelete && (
               <button
                 type="button"
@@ -217,12 +213,10 @@ export function PostDetail() {
 
         {deleteError && <div className="alert alert-danger py-2 small">{deleteError}</div>}
 
-        {/* Descripción completa */}
         <p className="fs-5 text-white mb-4" style={{ whiteSpace: 'pre-line' }}>
           {post.description}
         </p>
 
-        {/* Imágenes */}
         {images.length > 0 && (
           <div className="post-images-grid mb-4">
             {images.map((img) => (
@@ -240,7 +234,6 @@ export function PostDetail() {
           </div>
         )}
 
-        {/* Etiquetas */}
         {post.Tags && post.Tags.length > 0 && (
           <div className="d-flex flex-wrap gap-2">
             {post.Tags.map((tag) => (
@@ -252,11 +245,9 @@ export function PostDetail() {
         )}
       </article>
 
-      {/* Sección de Comentarios */}
       <section className="card shadow-sm border-0 p-4 rounded-4">
         <h3 className="h5 fw-bold mb-3 text-white">Comentarios ({comments.length})</h3>
 
-        {/* Formulario para comentar */}
         {user ? (
           <form onSubmit={handleCommentSubmit} className="mb-4">
             {commentError && <div className="alert alert-danger py-2 small">{commentError}</div>}
@@ -288,7 +279,6 @@ export function PostDetail() {
           </div>
         )}
 
-        {/* Lista de comentarios */}
         <div className="d-flex flex-column gap-2">
           {comments.length === 0 ? (
             <p className="text-muted small fst-italic mb-0">No hay comentarios en esta publicación aún.</p>

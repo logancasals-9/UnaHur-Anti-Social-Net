@@ -2,9 +2,6 @@ import type { User, Post, Comment, Tag, PostImage } from '../types';
 
 export const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 
-// ==================== USUARIOS ====================
-
-// GET /users -> Lista completa de usuarios (para validar el Login)
 export async function getUsers(): Promise<User[]> {
   const response = await fetch(`${API_URL}/users`);
   if (!response.ok) {
@@ -13,7 +10,6 @@ export async function getUsers(): Promise<User[]> {
   return await response.json();
 }
 
-// POST /users -> Crear nuevo usuario (para el Registro)
 export async function createUser(nickName: string, email: string): Promise<User> {
   const response = await fetch(`${API_URL}/users`, {
     method: 'POST',
@@ -22,7 +18,7 @@ export async function createUser(nickName: string, email: string): Promise<User>
   });
 
   if (!response.ok) {
-    // Leemos el JSON del body por si el backend mandó { error: "No se pudo crear el usuario" }
+
     const errorData = await response.json().catch(() => null);
     throw new Error(errorData?.error || 'No se pudo crear el usuario');
   }
@@ -30,9 +26,6 @@ export async function createUser(nickName: string, email: string): Promise<User>
   return await response.json();
 }
 
-// ==================== PUBLICACIONES (POSTS) ====================
-
-// GET /posts o GET /posts?userId=xxx -> Lista de publicaciones (todas o filtradas por usuario)
 export async function getPosts(userId?: number): Promise<Post[]> {
   const url = userId ? `${API_URL}/posts?userId=${userId}` : `${API_URL}/posts`;
   const response = await fetch(url);
@@ -42,7 +35,6 @@ export async function getPosts(userId?: number): Promise<Post[]> {
   return await response.json();
 }
 
-// GET /posts/:id -> Detalle de una publicación específica
 export async function getPostById(id: number | string): Promise<Post> {
   const response = await fetch(`${API_URL}/posts/${id}`);
   if (!response.ok) {
@@ -51,7 +43,6 @@ export async function getPostById(id: number | string): Promise<Post> {
   return await response.json();
 }
 
-// POST /posts -> Crear una nueva publicación
 export async function createPost(
   description: string,
   userId: number,
@@ -71,8 +62,6 @@ export async function createPost(
   return await response.json();
 }
 
-// DELETE /posts/:id -> Borrar una publicacion propia
-// Mandamos el userId para que el backend valide que el post es nuestro.
 export async function deletePost(id: number, userId: number): Promise<void> {
   const response = await fetch(`${API_URL}/posts/${id}?userId=${userId}`, {
     method: 'DELETE',
@@ -84,9 +73,6 @@ export async function deletePost(id: number, userId: number): Promise<void> {
   }
 }
 
-// ==================== ETIQUETAS (TAGS) ====================
-
-// GET /tags -> Listado de todas las etiquetas disponibles
 export async function getTags(): Promise<Tag[]> {
   const response = await fetch(`${API_URL}/tags`);
   if (!response.ok) {
@@ -95,9 +81,6 @@ export async function getTags(): Promise<Tag[]> {
   return await response.json();
 }
 
-// ==================== COMENTARIOS ====================
-
-// GET /comments/post/:postId -> Comentarios visibles de un post
 export async function getCommentsByPostId(postId: number | string): Promise<Comment[]> {
   const response = await fetch(`${API_URL}/comments/post/${postId}`);
   if (!response.ok) {
@@ -106,7 +89,6 @@ export async function getCommentsByPostId(postId: number | string): Promise<Comm
   return await response.json();
 }
 
-// POST /comments -> Crear un comentario nuevo en un post
 export async function createComment(
   content: string,
   userId: number,
@@ -126,9 +108,6 @@ export async function createComment(
   return await response.json();
 }
 
-// ==================== IMÁGENES DE POSTS ====================
-
-// GET /postimages/post/:postId -> Traer imágenes asociadas a un post
 export async function getImagesByPostId(postId: number | string): Promise<PostImage[]> {
   const response = await fetch(`${API_URL}/postimages/post/${postId}`);
   if (!response.ok) {
@@ -137,7 +116,6 @@ export async function getImagesByPostId(postId: number | string): Promise<PostIm
   return await response.json();
 }
 
-// POST /postimages -> Asociar una URL de imagen a un post
 export async function createPostImage(url: string, postId: number): Promise<PostImage> {
   const response = await fetch(`${API_URL}/postimages`, {
     method: 'POST',

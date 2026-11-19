@@ -14,7 +14,6 @@ export function Profile() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // Cargamos los posts del usuario logueado usando su userId (Query String)
   useEffect(() => {
     if (!user) return;
 
@@ -22,7 +21,7 @@ export function Profile() {
       try {
         setLoading(true);
         setError(null);
-        // Requisito TP: GET /posts?userId=xxx
+
         const data = await getPosts(user.id);
         setUserPosts(data);
       } catch (err) {
@@ -52,7 +51,7 @@ export function Profile() {
 
   return (
     <div className="container py-4 profile-container" style={{ maxWidth: '1200px' }}>
-      {/* Cabecera del Perfil con Bootstrap card y flexbox */}
+
       <section className="card shadow-sm border-0 mb-4 p-4 rounded-4">
         <div className="d-flex align-items-center gap-3 flex-wrap">
           <div className="profile-avatar-circle">
@@ -78,7 +77,6 @@ export function Profile() {
         </div>
       </section>
 
-      {/* Listado de publicaciones propias */}
       <section>
         <h3 className="h5 fw-bold mb-3 text-white">
           Mis Publicaciones ({userPosts.length})

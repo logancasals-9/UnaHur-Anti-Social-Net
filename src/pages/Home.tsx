@@ -39,7 +39,6 @@ export function Home() {
     fetchData();
   }, []);
 
-  // Sacamos el post borrado de la lista sin volver a pedir todo al backend
   const handlePostDeleted = (postId: number) => {
     setPosts((prev) => prev.filter((p) => p.id !== postId));
   };
@@ -50,7 +49,7 @@ export function Home() {
 
   return (
     <div className="container py-4" style={{ maxWidth: '1200px' }}>
-      {/* Banner de bienvenida (Sobre Nosotros) */}
+
       <section className="hero-banner p-4 p-md-5 mb-4 text-center">
         <h1 className="hero-title mb-2">UnaHur Anti-Social Net</h1>
         <p className="lead mb-0 opacity-90">
@@ -58,7 +57,6 @@ export function Home() {
         </p>
       </section>
 
-      {/* Barra de Filtro por Etiquetas (Bonus opcional) */}
       {tags.length > 0 && (
         <section className="tags-filter-bar p-3 mb-4 d-flex align-items-center gap-2 flex-wrap">
           <span className="fw-bold text-secondary small me-2">Filtrar por etiqueta:</span>
@@ -80,11 +78,9 @@ export function Home() {
         </section>
       )}
 
-      {/* Feed de Publicaciones */}
       <main>
         <h2 className="h4 mb-3 feed-heading">Feed de Publicaciones Recientes</h2>
 
-        {/* Spinner nativo de Bootstrap */}
         {loading && (
           <div className="text-center py-5">
             <div className="spinner-border text-success" role="status">
@@ -94,7 +90,6 @@ export function Home() {
           </div>
         )}
 
-        {/* Alerta nativa de Bootstrap */}
         {error && <div className="alert alert-danger">{error}</div>}
 
         {!loading && !error && filteredPosts.length === 0 && (
@@ -105,7 +100,6 @@ export function Home() {
           </div>
         )}
 
-        {/* Grilla responsive: 1 columna en celular, 2 en tablet, 3 en escritorio */}
         <div className="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-3">
           {filteredPosts.map((post) => (
             <div className="col" key={post.id}>
