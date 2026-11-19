@@ -1,3 +1,5 @@
+// describen la forma que tienen los datos que vienen de la API.
+
 export interface User {
   id: number;
   nickName: string;

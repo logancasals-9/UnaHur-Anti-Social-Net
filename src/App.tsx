@@ -50,11 +50,6 @@ export function App() {
             </Routes>
           </main>
 
-          <footer className="app-footer">
-            <p>
-              UnaHur Anti-Social Net • Construcción de Interfaces de Usuario • {new Date().getFullYear()}
-            </p>
-          </footer>
         </div>
       </BrowserRouter>
     </AuthProvider>
